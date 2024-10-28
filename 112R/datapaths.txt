@@ -1,8 +1,0 @@
-ExperimentRoot :           E:\Users\rpolicelli\Brain Project\LRCP Experiments
-DicomServerHttpConfig :    E:\Users\rpolicelli\Orthanc Config\DicomServerHttpSettings.mat
-MySQLConnectionSettings :  E:\Users\rpolicelli\MySQLConnectionSettings.mat
-REDCapConnectionSettings :  E:\Users\rpolicelli\REDCap Config\REDCapAPIConnectionSettings.mat
-DicomImagingDatabase :     E:\Users\rpolicelli\Data\Imaging\Dicom Database
-DicomDataCurationFolder :  E:\Users\rpolicelli\Data\Imaging\Dicom Data Curation
-ImagingSeriesAssignmentFile : E:\Users\rpolicelli\Data\Imaging\Imaging Series Assignments.xlsx
-MySQLBackupsFolder :       E:\Users\rpolicelli\Data\MySQL Database\Backups
