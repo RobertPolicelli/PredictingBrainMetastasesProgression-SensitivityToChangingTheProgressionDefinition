@@ -1,0 +1,9 @@
+ExperimentRoot :           E:\Users\ddevries\LRCP BM\Experiments
+DicomImagingDatabase :     E:\Users\ddevries_nobackup\LRCP BM\Data\Dicom Imaging Database
+ProcessedImagingDatabase : E:\Users\ddevries_nobackup\LRCP BM\Data\Imaging\Processed Imaging Database
+DicomServerHttpConfig :    E:\Users\ddevries\LRCP BM\Orthanc Config\DicomServerHttpSettings.mat
+DicomDownloadCacheFolder : E:\Users\ddevries_nobackup\LRCP BM\Data\Imaging\Orthanc Download Cache
+DicomDataCurationFolder :  E:\Users\ddevries\LRCP BM\Data\Imaging\Dicom Data Curation
+MySQLConnectionSettings :  E:\Users\ddevries\LRCP BM\MySQL Config\MySQLConnectionSettings.mat
+REDCapConnectionSettings :  E:\Users\ddevries\LRCP BM\REDCap Config\REDCapAPIConnectionSettings.mat
+MySQLBackupsFolder :       E:\Users\ddevries\LRCP BM\Data\MySQL Database\Backups
