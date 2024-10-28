@@ -1,0 +1,107 @@
+classdef ImagingStudy
+    %ImagingStudy
+    
+    
+    % *********************************************************************   ORDERING: 1 Abstract        X.1 Public       X.X.1 Not Constant
+    % *                            PROPERTIES                             *             2 Not Abstract -> X.2 Protected -> X.X.2 Constant
+    % *********************************************************************                               X.3 Private
+    
+    properties (SetAccess = private, GetAccess = public)        
+        dtDicomDateTime (1,1) datetime
+        
+        sDicomID (1,1) string
+        sDicomInstanceUID (1,1) string
+        
+        sOrthancUUID (1,1) string
+        
+        sDicomDescription (1,1) string
+        
+        voImagingSeries (:,1) ImagingSeries = ImagingSeries.empty(0,1)
+    end
+    
+    
+    
+    % *********************************************************************   ORDERING: 1 Abstract     -> X.1 Not Static 
+    % *                          PUBLIC METHODS                           *             2 Not Abstract    X.2 Static
+    % *********************************************************************
+    
+    methods (Access = public)
+        
+        function obj = ImagingStudy(dtDicomDateTime, sDicomID, sDicomInstanceUID, sOrthancUUID, sDicomDescription, voImagingSeries)
+            %obj = ImagingStudy(dtDicomDateTime, sDicomID, sDicomInstanceUID, sOrthancUUID, sDicomDescription, voImagingSeries)
+            
+            obj.dtDicomDateTime = dtDicomDateTime;
+            
+            obj.sDicomID = sDicomID;
+            obj.sDicomInstanceUID = sDicomInstanceUID;
+            
+            obj.sOrthancUUID = sOrthancUUID;
+            
+            obj.sDicomDescription = sDicomDescription;
+            
+            obj.voImagingSeries = voImagingSeries;
+        end
+        
+        
+        % >>>>>>>>>>>>>>>>>>>>>> PROPERTY GETTERS <<<<<<<<<<<<<<<<<<<<<<<<<
+        
+    end
+    
+    
+    methods (Access = public, Static)
+                
+        function voStudies = LoadFromDatabaseByPatientStudyId(dPatientStudyId)
+            arguments
+                dPatientStudyId (1,1) double
+            end
+            
+            tOutput = SQLUtilities.SelectFromDatabase(MySQLDatabase.GetConnection(), "dicom_studies", [], "WHERE fk_dicom_studies_patient_study_id = " + string(dPatientStudyId));
+            
+            if size(tOutput,1) == 0
+                voStudies = ImagingStudy.empty;                
+            else
+                dNumStudies = size(tOutput,1);
+                c1oStudies = cell(dNumStudies,1);
+                
+                for dStudyIndex=1:dNumStudies
+                    
+                    c1oStudies = ImagingStudy(dtDicomDateTime, sDicomID, sDicomInstanceUID, sOrthancUUID, sDicomDescription, voImagingSeries);
+                end
+                
+                
+                voStudies = ImagingStudy(...
+                    tOutput.course_date{1},...
+                    BrainRadiationPlan.LoadFromDatabaseByImagingStudyId(CellArrayUtils.CellArrayOfObjects2MatrixOfObjects(tOutput.id_brain_radiation_courses)));
+            end
+        end        
+    end
+    
+    
+    
+    % *********************************************************************   ORDERING: 1 Abstract     -> X.1 Not Static
+    % *                         PRIVATE METHODS                           *             2 Not Abstract    X.2 Static
+    % *********************************************************************
+    
+    methods (Access = private)
+    end
+    
+    
+    
+    % <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    % <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    
+    
+    
+    % *********************************************************************
+    % *                        UNIT TEST ACCESS                           *
+    % *                  (To ONLY be called by tests)                     *
+    % *********************************************************************
+    
+    methods (Access = {?matlab.unittest.TestCase}, Static = false)        
+    end
+    
+    
+    methods (Access = {?matlab.unittest.TestCase}, Static = true)        
+    end
+end
+
